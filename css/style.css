@@ -1,0 +1,54 @@
+﻿.container {
+    width: 1024px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+.game__list {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.game__item {
+    display: flex;
+    height: 100px;
+    width: 200px;
+    border: 1px solid black;
+    margin-top: 15px;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    background-size: cover;
+}
+
+.game__item:not(:nth-child(4n)) {
+    margin-right: 15px;
+}
+
+.game__hidden {
+    font-size: 0;
+}
+
+.game__done {
+    border: 2px solid green;
+}
+
+.game__show {
+    font-size: 15px;
+}
+
+.game__restart {
+    display: block;
+    width: 100px;
+    background: gray;
+    cursor: pointer;
+    color: black;
+    margin: 0 auto;
+    margin-top: 20px;
+}
+
+.game__heading {
+    display: none;
+}
