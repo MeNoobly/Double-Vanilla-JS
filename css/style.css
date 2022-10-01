@@ -31,7 +31,11 @@
     font-size: 0;
 }
 
-.game__done {
+.game__choose {
+    border: 2px solid red;
+}
+
+.game__done{
     border: 2px solid green;
 }
 
