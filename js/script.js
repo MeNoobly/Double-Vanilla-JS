@@ -2,7 +2,7 @@
 (function() {
     const objectWithGame = {
         chooseCountCards: 0,
-        timeForGame: 10,
+        timeForGame: localStorage.getItem("startTime"),
         arrayForStartPosition: [],
         arrayOfValues: [],
         statusOfGame: 1,
@@ -94,10 +94,14 @@
             }
 
             let timerForGameId = setInterval(() => {
+                let stateHeading = document.querySelector(".game__heading");
+                
                 timeForPlaying.innerHTML = --this.timeForGame; // decriment time
 
                 if (this.timeForGame === 0) {
                     this.statusOfGame = 0; // if time done, off game
+                    stateHeading.innerHTML = "Loose";
+                    stateHeading.style.display = "block";
                 }
 
                 let winningArray = document.querySelectorAll(".game__done"); // get all done elements
@@ -113,7 +117,7 @@
 
             }, 1000);
 
-            setTimeout(() => clearInterval(timerForGameId), 10000); // end timer
+            setTimeout(() => clearInterval(timerForGameId), this.timeForGame * 1000); // end timer
 
             // add elements in DOM
             divContainer.append(stateHeading);
@@ -124,14 +128,16 @@
         },
         
         startGame() {
-            while (this.chooseCountCards % 2 !== 0 ||
-                this.chooseCountCards === 0 || 
-                this.chooseCountCards === null || 
-                this.chooseCountCards === undefined) {
-                this.chooseCountCards = parseInt(prompt("Сколько хотите добавить карточек", ""));
-            }
+            // while (this.chooseCountCards % 2 !== 0 ||
+            //     this.chooseCountCards === 0 || 
+            //     this.chooseCountCards === null || 
+            //     this.chooseCountCards === undefined) {
+            //     this.chooseCountCards = parseInt(prompt("Сколько хотите добавить карточек", ""));
+            // }
         
-            this.arrayForStartPosition = this.createArray(this.chooseCountCards); // create array with input count of cards
+            // this.arrayForStartPosition = this.createArray(localStorage.getItem("startCount")); // create array with input count of cards
+            this.arrayForStartPosition = this.createArray(Number(localStorage.getItem("startCount")));
+            this.chooseCountCards = Number(localStorage.getItem("startCount"));
             this.arrayForStartPosition = this.shuffleArray(this.arrayForStartPosition); // shuffle places
             this.createFullGame(); // create game
         }
