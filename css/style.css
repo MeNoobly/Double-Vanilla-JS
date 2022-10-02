@@ -1,7 +1,21 @@
-﻿.container {
+﻿@import url('https://fonts.googleapis.com/css2?family=Silkscreen&display=swap');
+
+* {
+    font-family: 'Silkscreen', cursive;
+}
+
+::selection {
+    background: rgb(26, 24, 24);
+}
+
+.container {
     width: 1024px;
     margin: 0 auto;
-    padding: 0 15px;
+    padding: 20px 15px;
+}
+
+.game__body {
+    background: rgb(26, 24, 24);
 }
 
 .game__list {
@@ -15,16 +29,22 @@
     display: flex;
     height: 100px;
     width: 200px;
-    border: 1px solid black;
+    border: 2px solid white;
+    color: white;
     margin-top: 15px;
     align-items: center;
     justify-content: center;
     cursor: pointer;
     background-size: cover;
+    transition: box-shadow 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .game__item:not(:nth-child(4n)) {
     margin-right: 15px;
+}
+
+.game__item:hover {
+    box-shadow: 0px 0px 1px 4px white;
 }
 
 .game__hidden {
@@ -33,10 +53,20 @@
 
 .game__choose {
     border: 2px solid red;
+    transition: box-shadow 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-.game__done{
+.game__choose:hover {
+    box-shadow: 0px 0px 1px 4px red;
+}
+
+.game__done {
     border: 2px solid green;
+    transition: box-shadow 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.game__done:hover {
+    box-shadow: 0px 0px 1px 4px green;
 }
 
 .game__show {
@@ -45,15 +75,70 @@
 
 .game__restart {
     display: block;
-    width: 100px;
-    background: gray;
+    width: 200px;
+    height: 60px;
+    background: white;
     cursor: pointer;
-    color: black;
+    color: rgb(26, 24, 24);
     margin: 0 auto;
-    margin-top: 20px;
+    margin-top: 40px;
+    font-size: 20px;
+    border-radius: 40%;
+    transition: box-shadow 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.game__restart:hover {
+    box-shadow: 0px 0px 1px 4px white;
 }
 
 .game__heading {
     display: none;
+    color: white;
+    text-align: center;
+    font-size: 60px;
+    margin-bottom: 30px;
 }
 
+.game__main-header {
+    color: white;
+    text-align: center;
+    font-size: 60px;
+    margin: 0;
+    margin-bottom: 20px;
+}
+
+.game__start_button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    width: 170px;
+    height: 50px;
+    margin-top: 10px;
+    border-radius: 40%;
+    font-size: 20px;
+    color:rgb(26, 24, 24);
+    transition: box-shadow 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.game__start_button:hover {
+    box-shadow: 0px 0px 1px 4px white;
+}
+
+.game__start_svg {
+    width: 30px;
+    height: 30px;
+}
+
+.game__start_p {
+    font-size: 20px;
+    margin-left: 10px;
+}
+
+.game__timer {
+    color: white;
+    text-align: center;
+    font-size: 45px;
+    margin-top: 50px;
+    margin-bottom: 20px;
+}

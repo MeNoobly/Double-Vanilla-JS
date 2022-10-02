@@ -54,10 +54,10 @@
                             
                             context.doneId.push(choosenElements[0].id, choosenElements[1].id); // add elements to array with done items
                         } else {
-                            setTimeout(context.sleepBeforeRemove(choosenElements), 300); // hide not equals elements
+                            setTimeout(context.sleepBeforeRemove(choosenElements), 500); // hide not equals elements
                         }
 
-                        setTimeout(() => choosenElements.forEach(item => item.classList.remove("game__choose")), 300); // delete class game__choose from elements        
+                        setTimeout(() => choosenElements.forEach(item => item.classList.remove("game__choose")), 400); // delete class game__choose from elements        
                     } 
                 }
             };
@@ -66,13 +66,35 @@
         createFullGame() {
             // create DOM elements
             let divContainer = document.createElement("div");
+            let startLink = document.createElement("a");
+            let startButton = document.createElement("button");
             let listOfCards = document.createElement("ul");
             let restartButton = document.createElement("button");
             let stateHeading = document.createElement("h2");
             let timeForPlaying = document.createElement("p");
+            let mainHeading = document.createElement("h1");
+            let menuArrow = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+            let menuArrowPath = document.createElementNS("http://www.w3.org/2000/svg", "path");
+            let menuArrowP = document.createElement("p");
+            
+            startLink.href = "start.html";
 
             restartButton.innerHTML = "Restart game";
-            timeForPlaying.innerHTML = this.timeForGame; // add timeForGame on page
+            timeForPlaying.innerHTML = `Осталось времени: ${this.timeForGame}`; // add timeForGame on page
+
+            menuArrow.setAttribute("width", "20px");
+            menuArrow.setAttribute("height", "20px");
+            menuArrow.setAttribute("viewBox", "0 -89 219 219");
+            menuArrow.setAttribute("fill", "none");
+            menuArrow.setAttribute("xmlns", "http://www.w3.org/2000/svg");
+
+            menuArrowPath.setAttribute("d", "M21.489 29.4305C36.9333 31.3498 51.3198 33.0559 65.7063 34.9753C66.7641 35.1885 67.6104 36.4681 69.9376 38.3875C63.1675 39.2406 57.8783 40.3069 52.5892 40.5201C38.6259 40.9467 24.8741 40.9467 10.9107 40.9467C9.21821 40.9467 7.5257 41.1599 5.83317 40.7334C0.332466 39.6671 -1.57164 36.0416 1.39028 31.1365C2.87124 28.7906 4.56377 26.658 6.46786 24.7386C13.6611 17.4877 21.0659 10.4499 28.4707 3.41223C29.7401 2.13265 31.6442 1.49285 34.183 0C34.6061 10.8765 23.8162 13.8622 21.489 22.3927C23.3931 21.9662 25.0856 21.7529 26.5666 21.3264C83.6894 5.54486 140.601 7.25098 197.3 22.606C203.224 24.0988 208.936 26.4447 214.649 28.5773C217.61 29.6437 220.149 31.9896 218.457 35.6151C216.976 39.2406 214.014 39.2406 210.629 37.7477C172.759 20.6866 132.561 18.7672 91.9404 19.407C70.7838 19.6203 50.0504 21.9662 29.5285 26.8713C26.9897 27.5111 24.4509 28.3641 21.489 29.4305Z");
+            menuArrowPath.setAttribute("fill", "#0D1927");
+
+            menuArrow.appendChild(menuArrowPath);
+
+            menuArrowP.innerHTML = "В меню";
+            mainHeading.innerHTML = "DOUBLE";
 
             restartButton.addEventListener("click", this.restartGame); // add fuction restartGame to restartButton
             
@@ -81,7 +103,13 @@
             listOfCards.classList.add("game__list");
             restartButton.classList.add("game__restart");
             stateHeading.classList.add("game__heading");
-            
+            startLink.classList.add("game__start_link");
+            startButton.classList.add("game__start_button");
+            mainHeading.classList.add("game__main-header");
+            menuArrow.classList.add("game__start_svg");
+            menuArrowP.classList.add("game__start_p");
+            timeForPlaying.classList.add("game__timer");
+
             let iterrator = 0; // iterrator for id
             for (let item of this.arrayForStartPosition) {
                 let element = document.createElement("li");    
@@ -96,11 +124,11 @@
             let timerForGameId = setInterval(() => {
                 let stateHeading = document.querySelector(".game__heading");
                 
-                timeForPlaying.innerHTML = --this.timeForGame; // decriment time
+                timeForPlaying.innerHTML = `Осталось времени: ${--this.timeForGame}`; // decriment time
 
                 if (this.timeForGame === 0) {
                     this.statusOfGame = 0; // if time done, off game
-                    stateHeading.innerHTML = "Loose";
+                    stateHeading.innerHTML = "YOU LOOSE";
                     stateHeading.style.display = "block";
                 }
 
@@ -109,7 +137,7 @@
                 if (this.chooseCountCards === winningArray.length) { // if all element is done
                     let stateHeading = document.querySelector(".game__heading");
 
-                    stateHeading.innerHTML = "Win";
+                    stateHeading.innerHTML = "YOU WIN!!!";
                     stateHeading.style.display = "block";
 
                     clearInterval(timerForGameId);
@@ -120,11 +148,16 @@
             setTimeout(() => clearInterval(timerForGameId), this.timeForGame * 1000); // end timer
 
             // add elements in DOM
-            divContainer.append(stateHeading);
+            divContainer.append(startLink);
+            startLink.append(startButton);
+            startButton.append(menuArrow);
+            startButton.append(menuArrowP);
+            divContainer.append(mainHeading);
             divContainer.append(listOfCards);
-            divContainer.append(restartButton);
             divContainer.append(timeForPlaying);
-            document.body.append(divContainer);
+            divContainer.append(stateHeading);
+            divContainer.append(restartButton);
+            document.body.append(divContainer);            
         },
         
         startGame() {
