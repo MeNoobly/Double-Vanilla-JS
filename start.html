@@ -18,23 +18,29 @@
   </head>
   <body class="start__body">
     <div class="start__container">
-      <p class="start__title">Введите количество карточек:</p>
-      <input
-        type="text"
-        name="start__count"
-        id="start__count"
-        class="start__input"
-      />
-      <p class="start__title">Введите время игры:</p>
-      <input
-        type="text"
-        name="start__time"
-        id="start__time"
-        class="start__input"
-      />
-      <a href="index.html" class="start__link">
+      <form class="start__form" novalidate action="index.html">
+        <span class="start__title">Введите количество карточек:</span>
+        <input
+          required
+          name="start__count"
+          id="start__count"
+          class="start__input"
+          type="text"
+          minlength="1"
+        />
+        <span class="start__error_first"></span>
+        <span class="start__title">Введите время игры:</span>
+        <input
+          required
+          name="start__time"
+          id="start__time"
+          class="start__input"
+          type="text"
+          minlength="1"
+        />
+        <span class="start__error_second"></span>
         <button class="start__button" id="start__button">Начать игру</button>
-      </a>
+      </form>
     </div>
   </body>
 </html>

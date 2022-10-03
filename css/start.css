@@ -9,6 +9,10 @@
 }
 
 .start__container {
+    height: 100%;
+}
+
+.start__form {
     display: flex;
     flex-direction: column;
     justify-content: center;

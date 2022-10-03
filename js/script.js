@@ -28,6 +28,90 @@
             location.reload(true); // reload page
         },
 
+        functionforTime(time) {
+            let timeHour;
+            let timeMinute;
+            let timeSecond;
+            let wordHour;
+            let wordMinute;
+            let wordSecond;
+            let result;
+
+            if (time / 3600 < 1) {
+                timeHour = 0;
+            } else {
+                timeHour = Math.floor(time / 3600);
+            }
+
+            if ((time - timeHour * 60) / 60 < 1) {
+                timeMinute = 0;
+            } else {
+                timeMinute = Math.floor(time / 60);
+            }
+
+            timeSecond = Math.floor(time - timeHour * 3600 - timeMinute * 60);
+
+            switch (timeHour % 10) {
+                case 1:
+                    wordHour = "час";
+                    break;
+                case 2:
+                case 3:
+                case 4:
+                    wordHour = "часа";
+                    break;
+                default:
+                    wordHour = "часов";
+                    break;
+            }
+
+            switch (timeMinute % 10) {
+                case 1:
+                    wordMinute = "минута";
+                    break;
+                case 2:
+                case 3:
+                case 4:
+                    wordMinute = "минуты";
+                    break;
+                default:
+                    wordMinute = "минут";
+                    break;
+            }
+
+            switch (timeSecond % 100) {
+                case 1:
+                    wordSecond = "секунда";
+                    break;
+                case 2:
+                case 3:
+                case 4:
+                    wordSecond = "секунды";
+                    break;
+                default:
+                    wordSecond = "секунд";
+                    break;
+            }
+
+            if (timeHour !== 0) {
+                if (timeSecond !== 0) {
+                    result = `Осталось ${timeHour} ${wordHour}, ${timeMinute} ${wordMinute}, ${timeSecond} ${wordSecond}`;
+                } else {
+                    result = `Осталось ${timeHour} ${wordHour}, ${timeMinute} ${wordMinute}`;
+                }
+            } else if (timeMinute !== 0) {
+                if (timeSecond !== 0) {
+                    result = `Осталось ${timeMinute} ${wordMinute}, ${timeSecond} ${wordSecond}`;
+                } else {
+                    result = `Осталось ${timeMinute} ${wordMinute}`;
+                }
+            } else {
+                result = `Осталось ${timeSecond} ${wordSecond}`;
+            }
+            
+            return result;
+        },
+
         compareValues(context) {
             return function compareValuesEvent() {
                 if (context.statusOfGame) { // if timer not end
@@ -79,8 +163,8 @@
             
             startLink.href = "start.html";
 
-            restartButton.innerHTML = "Restart game";
-            timeForPlaying.innerHTML = `Осталось времени: ${this.timeForGame}`; // add timeForGame on page
+            restartButton.innerHTML = "Перезапустить игру";
+            timeForPlaying.innerHTML = this.functionforTime(this.timeForGame); // add timeForGame on page
 
             menuArrow.setAttribute("width", "20px");
             menuArrow.setAttribute("height", "20px");
@@ -124,11 +208,11 @@
             let timerForGameId = setInterval(() => {
                 let stateHeading = document.querySelector(".game__heading");
                 
-                timeForPlaying.innerHTML = `Осталось времени: ${--this.timeForGame}`; // decriment time
+                timeForPlaying.innerHTML = this.functionforTime(--this.timeForGame); // decriment time
 
                 if (this.timeForGame === 0) {
                     this.statusOfGame = 0; // if time done, off game
-                    stateHeading.innerHTML = "YOU LOOSE";
+                    stateHeading.innerHTML = "ПРОИГРЫШ";
                     stateHeading.style.display = "block";
                 }
 
@@ -137,7 +221,7 @@
                 if (this.chooseCountCards === winningArray.length) { // if all element is done
                     let stateHeading = document.querySelector(".game__heading");
 
-                    stateHeading.innerHTML = "YOU WIN!!!";
+                    stateHeading.innerHTML = "ПОБЕДА!!!";
                     stateHeading.style.display = "block";
 
                     clearInterval(timerForGameId);

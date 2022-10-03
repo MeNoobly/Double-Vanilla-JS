@@ -36,6 +36,7 @@
     justify-content: center;
     cursor: pointer;
     background-size: cover;
+    font-size: 20px;
     transition: box-shadow 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
@@ -75,7 +76,7 @@
 
 .game__restart {
     display: block;
-    width: 200px;
+    width: 250px;
     height: 60px;
     background: white;
     cursor: pointer;
@@ -97,6 +98,7 @@
     text-align: center;
     font-size: 60px;
     margin-bottom: 30px;
+    margin-top: 30px;
 }
 
 .game__main-header {
