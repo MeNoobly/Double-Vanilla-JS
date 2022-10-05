@@ -19,6 +19,7 @@
   <body class="start__body">
     <div class="start__container">
       <form class="start__form" novalidate action="index.html">
+        <h1 class="start__main-header">DOUBLE</h1>
         <span class="start__title">Введите количество карточек:</span>
         <input
           required
@@ -27,8 +28,9 @@
           class="start__input"
           type="text"
           minlength="1"
+          autocomplete="off"
         />
-        <span class="start__error_first"></span>
+        <span class="start__error"></span>
         <span class="start__title">Введите время игры:</span>
         <input
           required
@@ -37,9 +39,12 @@
           class="start__input"
           type="text"
           minlength="1"
+          autocomplete="off"
         />
-        <span class="start__error_second"></span>
-        <button class="start__button" id="start__button">Начать игру</button>
+        <span class="start__error"></span>
+        <button class="start__button" id="start__button" type="submit">
+          Начать игру
+        </button>
       </form>
     </div>
   </body>

@@ -38,20 +38,20 @@
             let result;
 
             if (time / 3600 < 1) {
-                timeHour = 0;
+                timeHour = 0; // if time less than 1 hour
             } else {
-                timeHour = Math.floor(time / 3600);
+                timeHour = Math.floor(time / 3600); // get count of hours
             }
 
             if ((time - timeHour * 60) / 60 < 1) {
-                timeMinute = 0;
+                timeMinute = 0; // if time less than 1 minute
             } else {
-                timeMinute = Math.floor(time / 60);
+                timeMinute = Math.floor((time - timeHour * 3600) / 60); // get count of minutes
             }
 
-            timeSecond = Math.floor(time - timeHour * 3600 - timeMinute * 60);
+            timeSecond = Math.floor(time - timeHour * 3600 - timeMinute * 60); // get count of seconds
 
-            switch (timeHour % 10) {
+            switch (timeHour % 10) { // add some words to time
                 case 1:
                     wordHour = "час";
                     break;
@@ -61,6 +61,15 @@
                     wordHour = "часа";
                     break;
                 default:
+                    wordHour = "часов";
+                    break;
+            }
+
+            switch (timeHour % 100) { // add some words to time
+                case 11:
+                case 12:
+                case 13:
+                case 14:
                     wordHour = "часов";
                     break;
             }
@@ -79,7 +88,17 @@
                     break;
             }
 
-            switch (timeSecond % 100) {
+            switch (timeMinute % 100) { // add some words to time
+                case 11:
+                case 12:
+                case 13:
+                case 14:
+                    wordMinute = "минут";
+                    break;
+            }
+
+
+            switch (timeSecond % 10) {
                 case 1:
                     wordSecond = "секунда";
                     break;
@@ -93,20 +112,29 @@
                     break;
             }
 
-            if (timeHour !== 0) {
+            switch (timeSecond % 100) { // add some words to time
+                case 11:
+                case 12:
+                case 13:
+                case 14:
+                    wordSecond = "секунд";
+                    break;
+            }
+
+            if (timeHour !== 0) { // add some phrases to time
                 if (timeSecond !== 0) {
-                    result = `Осталось ${timeHour} ${wordHour}, ${timeMinute} ${wordMinute}, ${timeSecond} ${wordSecond}`;
+                    result = `Осталось: ${timeHour} ${wordHour}, ${timeMinute} ${wordMinute}, ${timeSecond} ${wordSecond}`;
                 } else {
-                    result = `Осталось ${timeHour} ${wordHour}, ${timeMinute} ${wordMinute}`;
+                    result = `Осталось: ${timeHour} ${wordHour}, ${timeMinute} ${wordMinute}`;
                 }
             } else if (timeMinute !== 0) {
                 if (timeSecond !== 0) {
-                    result = `Осталось ${timeMinute} ${wordMinute}, ${timeSecond} ${wordSecond}`;
+                    result = `Осталось: ${timeMinute} ${wordMinute}, ${timeSecond} ${wordSecond}`;
                 } else {
-                    result = `Осталось ${timeMinute} ${wordMinute}`;
+                    result = `Осталось: ${timeMinute} ${wordMinute}`;
                 }
             } else {
-                result = `Осталось ${timeSecond} ${wordSecond}`;
+                result = `Осталось: ${timeSecond} ${wordSecond}`;
             }
             
             return result;
@@ -245,16 +273,8 @@
         },
         
         startGame() {
-            // while (this.chooseCountCards % 2 !== 0 ||
-            //     this.chooseCountCards === 0 || 
-            //     this.chooseCountCards === null || 
-            //     this.chooseCountCards === undefined) {
-            //     this.chooseCountCards = parseInt(prompt("Сколько хотите добавить карточек", ""));
-            // }
-        
-            // this.arrayForStartPosition = this.createArray(localStorage.getItem("startCount")); // create array with input count of cards
-            this.arrayForStartPosition = this.createArray(Number(localStorage.getItem("startCount")));
-            this.chooseCountCards = Number(localStorage.getItem("startCount"));
+            this.arrayForStartPosition = this.createArray(parseInt(localStorage.getItem("startCount"))); // get item from local storage (from page "start")
+            this.chooseCountCards = parseInt(localStorage.getItem("startCount")); // get item from local storage (from page "start")
             this.arrayForStartPosition = this.shuffleArray(this.arrayForStartPosition); // shuffle places
             this.createFullGame(); // create game
         }

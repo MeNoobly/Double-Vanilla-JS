@@ -40,10 +40,18 @@
     box-shadow: 0px 0px 7px 4px white;
 }
 
+.start__input_error {
+    box-shadow: 0px 0px 1px 5px rgb(193, 14, 14);
+}
+
 .start__title {
     font-size: 30px;
     color: white;
     margin-bottom: 25px;
+}
+
+.start__title_error {
+    color: rgb(193, 14, 14);
 }
 
 .start__button {
@@ -63,4 +71,17 @@
 
 .start__input:focus {
     box-shadow: 0px 0px 7px 4px white;
+}
+
+.start__error {
+    color: rgb(193, 14, 14);
+    font-size: 25px;
+    margin-bottom: 10px;
+}
+
+.start__main-header {
+    color: white;
+    text-align: center;
+    font-size: 60px;
+    margin-bottom: 30px;
 }
